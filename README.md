@@ -62,3 +62,27 @@ all 4095
 m 0 4095 2000
 m 15 4095 2000
 ```
+Sensory Substitution Vest Signal / Power Flow
+VISUAL PROCESSING PIPELINE
+OAK-D Lite Camera ↓ Captures RGB + Depth Data ↓ ESP32 Microcontroller ↓ Processes Visual Input / Downscales to 8×8 Representation ↓ Computes Desired Intensity for Each Motor ↓ Sends PWM Duty Cycle Commands via I2C ↓ 4× PCA9685 PWM Controllers ↓ Generate 64 Independent PWM Control Signals ↓ Motor Driver Stage ↓ Amplifies PWM Control Signals into High-Current Outputs ↓ 64× Coin Vibration Motors ↓ Spatial Tactile Feedback on User’s Back
+
+POWER DELIVERY PIPELINE
+1S LiPo Battery ↓ Power Regulation / Distribution Circuit ↓ Supplies: • ESP32 • PCA9685 Controllers • Motor Driver Stage
+
+Battery Motor Rail ↓ Motor Driver Supplies Current to Coin Motors
+
+PER-MOTOR SIGNAL / POWER PATH
+PCA9685 PWM Output ↓ Motor Driver Input ↓ Motor Driver Modulates Battery Power ↓ Battery → Motor Driver → Coin Motor → Ground ↓ Motor Vibrates with Intensity Proportional to PWM Duty Cycle
+
+COMPONENT RESPONSIBILITIES
+OAK-D Lite Camera: Captures environmental visual/depth information.
+
+ESP32: Processes camera output and determines motor activation levels.
+
+PCA9685: Generates precise PWM control signals for each motor channel.
+
+Motor Driver: Converts low-power PWM signals into high-current outputs suitable for driving vibration motors.
+
+Battery: Supplies electrical power for the system.
+
+Coin Motors: Convert electrical power into tactile vibration feedback.
